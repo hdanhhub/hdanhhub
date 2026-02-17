@@ -10,22 +10,6 @@ local success1 = pcall(function()
     loadSuccess = true
 end)
 
--- Cách 2: Load từ Raw GitHub
-if not loadSuccess then
-    local success2 = pcall(function()
-        vu1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Fluent.lua"))()
-        loadSuccess = true
-    end)
-end
-
--- Cách 3: Load từ CDN backup
-if not loadSuccess then
-    local success3 = pcall(function()
-        vu1 = loadstring(game:HttpGet("https://raw.githubusercontent.com/actyralf/fluent/main/Fluent.lua"))()
-        loadSuccess = true
-    end)
-end
-
 -- Nếu không load được, tạo UI cơ bản
 if not loadSuccess or not vu1 then
     warn("⚠️ Không thể load Fluent UI! Đang tạo UI backup...")
