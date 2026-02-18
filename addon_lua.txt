@@ -2676,4 +2676,70 @@ function redzlib:MakeWindow(Configs)
 	return Window
 end
 
+-- RGB Rainbow Loop
+do
+	local hue = 0
+	RunService.Heartbeat:Connect(function(dt)
+		hue = (hue + dt * 0.08) % 1
+
+		local function hsvToRgb(h, s, v)
+			local r, g, b
+			local i = math.floor(h * 6)
+			local f = h * 6 - i
+			local p = v * (1 - s)
+			local q = v * (1 - f * s)
+			local t = v * (1 - (1 - f) * s)
+			local mod = i % 6
+			if mod == 0 then r,g,b = v,t,p
+			elseif mod == 1 then r,g,b = q,v,p
+			elseif mod == 2 then r,g,b = p,v,t
+			elseif mod == 3 then r,g,b = p,q,v
+			elseif mod == 4 then r,g,b = t,p,v
+			elseif mod == 5 then r,g,b = v,p,q end
+			return Color3.new(r, g, b)
+		end
+
+		local mainColor    = hsvToRgb(hue, 0.45, 1.00)
+		local darkColor    = hsvToRgb(hue, 0.55, 0.25)
+		local strokeColor  = hsvToRgb(hue, 0.40, 1.00)
+		local textColor    = hsvToRgb(hue, 0.15, 1.00)
+		local darkText     = hsvToRgb(hue, 0.38, 0.92)
+
+		local gradHue1 = (hue + 0.08) % 1
+		local gradHue2 = (hue + 0.16) % 1
+		local gradient = ColorSequence.new({
+			ColorSequenceKeypoint.new(0.00, hsvToRgb(gradHue2, 0.60, 0.40)),
+			ColorSequenceKeypoint.new(0.50, hsvToRgb(hue,      0.40, 1.00)),
+			ColorSequenceKeypoint.new(1.00, hsvToRgb(gradHue1, 0.60, 0.40))
+		})
+
+		Theme["Color Hub 1"]     = gradient
+		Theme["Color Hub 2"]     = darkColor
+		Theme["Color Stroke"]    = strokeColor
+		Theme["Color Theme"]     = mainColor
+		Theme["Color Text"]      = textColor
+		Theme["Color Dark Text"] = darkText
+
+		for _, Val in ipairs(redzlib.Instances) do
+			pcall(function()
+				if Val.Type == "Gradient" then
+					Val.Instance.Color = gradient
+				elseif Val.Type == "Frame" then
+					Val.Instance.BackgroundColor3 = darkColor
+				elseif Val.Type == "Stroke" then
+					Val.Instance[GetColor(Val.Instance)] = strokeColor
+				elseif Val.Type == "Theme" then
+					Val.Instance[GetColor(Val.Instance)] = mainColor
+				elseif Val.Type == "Text" then
+					Val.Instance[GetColor(Val.Instance)] = textColor
+				elseif Val.Type == "DarkText" then
+					Val.Instance[GetColor(Val.Instance)] = darkText
+				elseif Val.Type == "ScrollBar" then
+					Val.Instance[GetColor(Val.Instance)] = mainColor
+				end
+			end)
+		end
+	end)
+end
+
 return redzlib
