@@ -7,24 +7,6 @@ hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Respa
     -- empty block
 end)
 -- Kiểm tra game Blox Fruits
-if game.PlaceId == 2753915549 then
-    World1 = true
-    print("🌊 Sea 1 - First Sea")
-elseif game.PlaceId == 4442272183 then
-    World2 = true
-    print("🌊 Sea 2 - Second Sea")
-elseif game.PlaceId == 7449423635 then
-    World3 = true
-    print("🌊 Sea 3 - Third Sea")
-else
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "❌ Lỗi!";
-        Text = "Script chỉ hoạt động trong Blox Fruits!";
-        Duration = 5;
-    })
-    wait(3)
-    error("Không phải game Blox Fruits!")
-end
 function MaterialMon()
     if _G.SelectMaterial ~= "Radiactive Material" then
         if _G.SelectMaterial ~= "Leather + Scrap Metal" then
@@ -9912,5 +9894,6 @@ v496:AddButton({Title = "Server Hop", Callback = function()
     Hop()
 end})
 return 
+
 
 
