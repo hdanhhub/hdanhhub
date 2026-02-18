@@ -3930,7 +3930,7 @@ v484:AddDiscordInvite({
     Name = "Tham Gia Discord",
     Description = "Link Sever Discord",
     Logo = "rbxassetid://100472177647993",
-    Invite = " https://vt.tiktok.com/ZSfEgfPk4/"
+    Invite = " https://dsc.gg/nopermc/"
 })
 local _ = v485:AddSection({"Select Melee,Sword,Gun,Fruit"})
 _G.SelectWeapon = "Melee"
@@ -9912,4 +9912,5 @@ v496:AddButton({Title = "Server Hop", Callback = function()
     Hop()
 end})
 return 
+
 
