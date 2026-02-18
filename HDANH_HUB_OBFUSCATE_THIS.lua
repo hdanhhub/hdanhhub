@@ -1,5 +1,5 @@
 -- This file was deobfuscated using Scene Deobfuscator discord.gg/deobfuscate :D
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/hdanhhub/hdanhhub/refs/heads/main/fixlagbyhdanh.lua"))()
 hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Death), function()
     -- empty block
 end)
@@ -9912,3 +9912,4 @@ v496:AddButton({Title = "Server Hop", Callback = function()
     Hop()
 end})
 return 
+
